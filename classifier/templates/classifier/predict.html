@@ -1,0 +1,15 @@
+{% extends "classifier/base.html" %}
+{% block content %}
+<div class="card"><h2>Predict Cinnamon Quality</h2>
+<p>Enter the lab test values and click Predict.</p>
+<form method="post">{% csrf_token %}
+{% for f in form %}<label for="{{ f.id_for_label }}">{{ f.label }}</label>{{ f }}{{ f.errors }}{% endfor %}
+<button class="go">Predict</button></form></div>
+{% if results %}
+<div class="card"><h2>Predicted Quality: <span class="{{ final }}">{{ final }}</span></h2>
+<p>Result from the best model (<b>{{ best }}</b>).</p>
+<table><tr><th>Model</th><th>Prediction</th><th>Accuracy</th></tr>
+{% for r in results %}<tr {% if r.is_best %}class="best"{% endif %}>
+<td>{{ r.name }}{% if r.is_best %} ⭐{% endif %}</td><td class="{{ r.prediction }}">{{ r.prediction }}</td><td>{{ r.accuracy }}%</td></tr>{% endfor %}
+</table></div>{% endif %}
+{% endblock %}

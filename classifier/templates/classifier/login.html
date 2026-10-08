@@ -1,0 +1,6 @@
+{% extends "classifier/base.html" %}
+{% block content %}
+<div class="card"><h2>Login</h2>
+<form method="post">{% csrf_token %}{{ form.as_p }}<button class="go">Login</button></form>
+<p>New here? <a href="{% url 'register' %}">Create an account</a></p></div>
+{% endblock %}

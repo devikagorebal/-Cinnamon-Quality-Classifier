@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Cinnamon Quality Classifier{% endblock %}</title>
+<style>
+ body{font-family:Segoe UI,Arial,sans-serif;background:#faf4ec;margin:0;color:#3b2a1a}
+ nav{background:#7b4a1e;color:#fff;padding:12px 24px;display:flex;justify-content:space-between;align-items:center}
+ nav a,nav button{color:#fff;margin-left:14px;text-decoration:none;background:none;border:0;font-size:1rem;cursor:pointer}
+ main{max-width:720px;margin:30px auto;padding:0 16px}
+ .card{background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 8px #0002;margin-bottom:20px}
+ label{display:block;margin-top:12px;font-weight:600}
+ input{width:100%;padding:9px;border:1px solid #cbb89e;border-radius:8px;box-sizing:border-box}
+ button.go,.go{margin-top:18px;background:#7b4a1e;color:#fff;border:0;padding:11px 22px;border-radius:8px;font-size:1rem;cursor:pointer}
+ table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #eee;text-align:left}
+ tr.best{background:#fff3d6;font-weight:700}
+ .msg{padding:10px;border-radius:8px;background:#e6f4ea;margin-bottom:10px}.msg.error{background:#fde7e7}
+ .errorlist{color:#b00020;margin:4px 0;padding-left:18px}
+ .High{color:#1b8a3a}.Medium{color:#c78a00}.Low{color:#c0392b}
+</style></head><body>
+<nav><strong>🌿 Cinnamon Quality Classifier</strong>
+<span>{% if user.is_authenticated %}Hi, {{ user.username }}
+ <form method="post" action="{% url 'logout' %}" style="display:inline">{% csrf_token %}<button>Logout</button></form>
+ {% else %}<a href="{% url 'login' %}">Login</a><a href="{% url 'register' %}">Register</a>{% endif %}</span></nav>
+<main>
+{% for m in messages %}<div class="msg {{ m.tags }}">{{ m }}</div>{% endfor %}
+{% block content %}{% endblock %}
+</main></body></html>
